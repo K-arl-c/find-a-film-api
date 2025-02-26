@@ -21,22 +21,28 @@ public class MovieItemController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:5173/")
     public List<MovieItem> getAllMovies(){
+
         return movieRepository.findAll();
     }
 
     @GetMapping("/{movieId}")
+    @CrossOrigin(origins = "http://localhost:5173/")
     public Optional<MovieItem> getMovieById(@PathVariable(required = true) Long movieId) {
+
         return movieRepository.findById(movieId);
     }
 
     @PostMapping()
+    @CrossOrigin(origins = "http://localhost:5173/")
     public MovieItem addMovie(@RequestBody MovieItem movieItem) {
         movieRepository.save(movieItem);
         return movieItem;
     }
 
     @DeleteMapping("/{movieId}")
+    @CrossOrigin(origins = "http://localhost:5173/")
     public String deleteById(@PathVariable(required = true) Long movieId){
         MovieItem target = movieRepository.findById(movieId).get();
         movieRepository.delete(target);
