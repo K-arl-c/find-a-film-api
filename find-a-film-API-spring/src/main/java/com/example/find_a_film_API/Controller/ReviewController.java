@@ -4,11 +4,12 @@ import com.example.find_a_film_API.Models.Movie;
 import com.example.find_a_film_API.Models.Review;
 import com.example.find_a_film_API.Repositories.MovieRepository;
 import com.example.find_a_film_API.Repositories.ReviewRepository;
+import com.example.find_a_film_API.Service.ReviewService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -17,23 +18,27 @@ import java.util.Optional;
 @RequestMapping("/reviews")
 public class ReviewController {
 
-    private final ReviewRepository reviewRepository;
-    private final MovieRepository movieRepository;
+//    private final ReviewRepository reviewRepository;
+    private ReviewService reviewService;
+
+//    @Autowired
+//    public ReviewController(ReviewRepository reviewRepository) {
+//        this.reviewRepository = reviewRepository;
+//    }
 
     @Autowired
-    public ReviewController(ReviewRepository reviewRepository, MovieRepository movieRepository) {
-        this.reviewRepository = reviewRepository;
-        this.movieRepository = movieRepository;
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
     }
 
-    @PostMapping("/populate")
-    public String addTestReviews(Movie movie) {
-        Long movieId = movie.getMovieId();
-        Optional<Movie> film = movieRepository.findById(movieId);
-        Review sevenReview = new Review("Seven holds it’s place as one of the pinnacle films of the neo‑noir, psychological thriller and serial killer genres 25 years on through it’s dark production design and solid direction from Fincher", 10, "sdraycott", film);
-        reviewRepository.save(sevenReview);
-        return String.format("Your review for the movie %s was added to the database", movie.getTitle());
+    @PostMapping("/{movieId}")
+    public ResponseEntity<String> createReview(@PathVariable Long movieId, @RequestBody Review newReview) {
+        try {
+            Review createdReview = reviewService.createReview(newReview, movieId);
+            return ResponseEntity.ok(String.format("Review for movie %s was added successfully", createdReview.getMovie().getTitle()));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("Movie with ID %d can not be found", movieId));
+        }
     }
-
 
 }

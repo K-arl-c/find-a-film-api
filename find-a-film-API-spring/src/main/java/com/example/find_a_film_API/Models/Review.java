@@ -19,22 +19,22 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    private Optional<Movie> movie;
+    private Movie movie;
 
     //no arg constructor
+
     public Review() {
     }
 
     //constructor
 
 
-    public Review(String review, int rating, String addedBy, Optional<Movie> movie) {
+    public Review(String review, int rating, String addedBy, Movie movie) {
         this.review = review;
         this.rating = rating;
         this.addedBy = addedBy;
         this.movie = movie;
     }
-
 
     //getters and setters
     public Long getId() {
@@ -69,11 +69,11 @@ public class Review {
         this.addedBy = addedBy;
     }
 
-    public Optional<Movie> getMovie() {
+    public Movie getMovie() {
         return movie;
     }
 
-    public void setMovie(Optional<Movie> movie) {
+    public void setMovie(Movie movie) {
         this.movie = movie;
     }
 }
