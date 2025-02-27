@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,10 @@ public class ReviewService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Movie with id %d does not exist", movieId )));
         newReview.setMovie(movie);
         return reviewRepository.save(newReview);
+    }
+
+    public List<Review> getReviewsByMovieId(Long movieId) {
+        movieRepository.findById(movieId).orElseThrow(() -> new EntityNotFoundException(String.format("Movie with ID %d does not exist", movieId)));
+        return reviewRepository.findByMovieId(movieId);
     }
 }

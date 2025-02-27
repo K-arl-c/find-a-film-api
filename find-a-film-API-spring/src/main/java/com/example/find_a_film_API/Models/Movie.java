@@ -1,4 +1,6 @@
 package com.example.find_a_film_API.Models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long movieId;
+    private Long id;
 
     private String title;
     private String genre;
@@ -21,6 +23,7 @@ public class Movie {
     private String addedBy;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews = new ArrayList<>();
 
     //No param constructor:
@@ -41,12 +44,12 @@ public class Movie {
     //Getters and Setters
 
 
-    public Long getMovieId() {
-        return movieId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -95,5 +98,13 @@ public class Movie {
 
     public void setAddedBy(String addedBy) {
         this.addedBy = addedBy;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

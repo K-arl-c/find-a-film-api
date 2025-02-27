@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -23,6 +24,15 @@ public class ReviewController {
     @Autowired
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
+    }
+    
+    @GetMapping("/{movieId}")
+    public ResponseEntity<List<Review>> getAllReviewsForMovie(@PathVariable Long movieId) {
+        List<Review> reviews = reviewService.getReviewsByMovieId(movieId);
+        if(reviews.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(reviews);
     }
 
     @PostMapping("/{movieId}")

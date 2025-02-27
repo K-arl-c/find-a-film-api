@@ -1,5 +1,6 @@
 package com.example.find_a_film_API.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -19,16 +20,14 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonBackReference
     private Movie movie;
 
     //no arg constructor
-
     public Review() {
     }
 
     //constructor
-
-
     public Review(String review, int rating, String addedBy, Movie movie) {
         this.review = review;
         this.rating = rating;
