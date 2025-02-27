@@ -15,7 +15,7 @@ public class Review {
     private Long Id;
 
     private String review;
-    private int rating;
+    private int rating =0;
     private String addedBy;
 
     @ManyToOne

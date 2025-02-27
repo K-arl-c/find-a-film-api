@@ -83,7 +83,7 @@ public class MovieController {
 
     @PostMapping("/populate")
     public String addTestMovies() {
-        if(movieRepository.findByTitle("Jaws") != null) {
+        if (movieRepository.findByTitle("Jaws") != null) {
             return "Test movies have already been added to the database";
         }
         List<Movie> testMovies = new ArrayList<>();
@@ -91,9 +91,8 @@ public class MovieController {
         Movie seven = new Movie("Seven", "Thriller", "Detectives Somerset and Mills are paired up to solve murders. Together they attempt to find a killer who is inspired by the seven deadly sins.", 1995, "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTGOnL9G5Bx6q6vw2ToNKpZLCsaKB_ZA1ZsmJLXDc-SfX04RUQXjiFEccEaLoxxWRIkL4Ct",  "sdraycott");
         testMovies.add(seven);
 
-        Movie jurassicPark = new Movie("Jurassic Park", "Science-fiction", "An industrialist invites some experts to visit his theme park of cloned dinosaurs. After a power failure, the creatures run loose, putting everyone's lives, including his grandchildren's, in danger.", 1993, "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ1JuD1fDYYs7-IqHydpi304Jr3eZsBW9i58o6yTa7d3tGzKFJvcFGwatAtxLIhTZaWJ8tY", "sdraycott");
+        Movie jurassicPark = new Movie("Jurassic Park", "Sci-Fi", "An industrialist invites some experts to visit his theme park of cloned dinosaurs. After a power failure, the creatures run loose, putting everyone's lives, including his grandchildren's, in danger.", 1993, "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ1JuD1fDYYs7-IqHydpi304Jr3eZsBW9i58o6yTa7d3tGzKFJvcFGwatAtxLIhTZaWJ8tY", "sdraycott");
         testMovies.add(jurassicPark);
-
 
         Movie jaws = new Movie("Jaws", "Thriller", "When a giant white shark fatally attacks swimmers on the shores of Amity Island, Sheriff Martin Brody teams up with a marine biologist and a local fisherman to hunt down the creature.", 1975, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM80rW1WI9XwnKfJuLCf8YlLwbQSvavcGPTbNNFY0MfZWPrOg8LMTce7Ml6zAPxIqbPTff", "sdraycott");
         testMovies.add(jaws);
