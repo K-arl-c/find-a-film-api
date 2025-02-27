@@ -1,11 +1,12 @@
 package com.example.find_a_film_API.Repositories;
 
 
-import com.example.find_a_film_API.Models.MovieItem;
+import com.example.find_a_film_API.Models.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository extends JpaRepository<MovieItem, Long> {
+public interface MovieRepository extends JpaRepository<Movie, Long> {
+    Movie findByTitle(String title);
 
 }
