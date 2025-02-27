@@ -25,7 +25,7 @@ public class ReviewController {
     public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
-    
+
     @GetMapping("/{movieId}")
     public ResponseEntity<List<Review>> getAllReviewsForMovie(@PathVariable Long movieId) {
         List<Review> reviews = reviewService.getReviewsByMovieId(movieId);
