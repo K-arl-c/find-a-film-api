@@ -1,6 +1,8 @@
 package com.example.find_a_film_API.Models;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "movies")
@@ -16,26 +18,24 @@ public class Movie {
     private int releaseYear;
     private int rating;
     private String imageURL;
+    private String addedBy;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "movie")
+    private List<Review> review;
 
     //No param constructor:
     public Movie() {
     }
 
-
     //Constructor
-
-    public Movie(String title, String genre, String description, int releaseYear, int rating, String imageURL, User user) {
+    public Movie(String title, String genre, String description, int releaseYear, int rating, String imageURL, String addedBy) {
         this.title = title;
         this.genre = genre;
         this.description = description;
         this.releaseYear = releaseYear;
         this.rating = rating;
         this.imageURL = imageURL;
-        this.user = user;
+        this.addedBy = addedBy;
     }
 
 
@@ -78,7 +78,7 @@ public class Movie {
         return releaseYear;
     }
 
-    public void setReleaseYear(Short releaseYear) {
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -86,7 +86,7 @@ public class Movie {
         return rating;
     }
 
-    public void setRating(byte rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -98,11 +98,11 @@ public class Movie {
         this.imageURL = imageURL;
     }
 
-    public User getUser() {
-        return user;
+    public String getAddedBy() {
+        return addedBy;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 }

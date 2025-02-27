@@ -1,0 +1,79 @@
+package com.example.find_a_film_API.Models;
+
+import jakarta.persistence.*;
+import org.springframework.data.annotation.LastModifiedBy;
+
+import java.util.Optional;
+
+@Entity
+@Table(name = "reviews")
+public class Review {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    private String review;
+    private int rating;
+    private String addedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Optional<Movie> movie;
+
+    //no arg constructor
+    public Review() {
+    }
+
+    //constructor
+
+
+    public Review(String review, int rating, String addedBy, Optional<Movie> movie) {
+        this.review = review;
+        this.rating = rating;
+        this.addedBy = addedBy;
+        this.movie = movie;
+    }
+
+
+    //getters and setters
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    public Optional<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Optional<Movie> movie) {
+        this.movie = movie;
+    }
+}

@@ -1,11 +1,10 @@
 package com.example.find_a_film_API.Repositories;
 
-import com.example.find_a_film_API.Models.User;
+
+import com.example.find_a_film_API.Models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
-
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 }
