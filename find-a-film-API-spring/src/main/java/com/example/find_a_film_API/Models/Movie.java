@@ -1,6 +1,7 @@
 package com.example.find_a_film_API.Models;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,24 +17,22 @@ public class Movie {
     private String genre;
     private String description;
     private int releaseYear;
-    private int rating;
     private String imageURL;
     private String addedBy;
 
-    @OneToMany(mappedBy = "movie")
-    private List<Review> review;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
 
     //No param constructor:
     public Movie() {
     }
 
     //Constructor
-    public Movie(String title, String genre, String description, int releaseYear, int rating, String imageURL, String addedBy) {
+    public Movie(String title, String genre, String description, int releaseYear, String imageURL, String addedBy) {
         this.title = title;
         this.genre = genre;
         this.description = description;
         this.releaseYear = releaseYear;
-        this.rating = rating;
         this.imageURL = imageURL;
         this.addedBy = addedBy;
     }
@@ -80,14 +79,6 @@ public class Movie {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     public String getImageURL() {

@@ -18,13 +18,7 @@ import java.util.Optional;
 @RequestMapping("/reviews")
 public class ReviewController {
 
-//    private final ReviewRepository reviewRepository;
     private ReviewService reviewService;
-
-//    @Autowired
-//    public ReviewController(ReviewRepository reviewRepository) {
-//        this.reviewRepository = reviewRepository;
-//    }
 
     @Autowired
     public ReviewController(ReviewService reviewService) {
